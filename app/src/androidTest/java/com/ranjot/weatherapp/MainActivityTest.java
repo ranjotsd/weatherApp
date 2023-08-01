@@ -13,12 +13,14 @@ import org.junit.runner.RunWith;
 public class MainActivityTest {
 
     @Rule
-    public ActivityScenarioRule<MainActivity> activityRule = new ActivityScenarioRule<>(
-            MainActivity.class);
+    public ActivityScenarioRule<MainActivity> activityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void button_clicks() {
-        activityRule.getScenario().onActivity(activity -> activity.findViewById(R.id.test_button).performClick());
-        assertEquals(1 + 2, 3);
+    public void loadsWeatherFragment() {
+        activityRule.getScenario().onActivity(
+            activity -> assertEquals(
+                activity.getSupportFragmentManager().findFragmentById(R.id.weather_card).getClass(),
+                WeatherCardFragment.class));
     }
 }
