@@ -1,7 +1,6 @@
 package com.ranjot.weatherapp;
 
 import android.os.Bundle;
-import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonObjectRequest request =
-                new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-                    Button b = findViewById(R.id.test_button);
-                    b.setText(response.toString());
-                    System.out.println("loaded response " + response);
-            }, error -> System.out.println("error response " + error.toString()));
+                new JsonObjectRequest(
+                        Request.Method.GET,
+                        url,
+                        null,
+                        response -> System.out.println("loaded response " + response),
+                        error -> System.out.println("error response " + error.toString()));
 
         queue.add(request);
     }
