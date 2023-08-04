@@ -12,13 +12,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WeatherCardFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.weather_card_fragment, container, false);
+        View view = inflater.inflate(R.layout.weather_card_fragment, container, false);
 
         RequestQueue queue = Volley.newRequestQueue(inflater.getContext());
         JsonObjectRequest request =
@@ -26,15 +28,21 @@ public class WeatherCardFragment extends Fragment {
                         Request.Method.GET,
                         WeatherRequestUtil.getRequestUrl("London", 2),
                         null,
-                        response -> {
-                            TextView textBody = v.findViewById(R.id.card_body);
-                            textBody.setText(response.toString());
-                        },
-                        e -> {
-                            TextView textBody = v.findViewById(R.id.card_body);
-                            textBody.setText(e.toString());
-                        });
+                        response -> setUpCardView(view, response),
+                        e -> System.out.println("Failed to load data" + e.getMessage()));
         queue.add(request);
-        return v;
+        return view;
+    }
+
+    private void setUpCardView(View view, JSONObject response) {
+        WeatherData weatherData;
+        try {
+            weatherData = WeatherRequestUtil.getWeatherData(response);
+        } catch (JSONException e) {
+            System.out.println("Failed to load data" + e.getMessage());
+            return;
+        }
+        TextView textDate = view.findViewById(R.id.card_date);
+        textDate.setText(weatherData.date());
     }
 }
