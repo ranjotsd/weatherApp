@@ -47,6 +47,8 @@ abstract class WeatherData {
 
         public abstract String description();
 
+        public abstract String temperature();
+
         public static HourWeatherData.Builder builder() {
             return new AutoValue_WeatherData_HourWeatherData.Builder();
         }
@@ -59,6 +61,8 @@ abstract class WeatherData {
             public abstract HourWeatherData.Builder setIconUri(String uri);
 
             public abstract HourWeatherData.Builder setDescription(String description);
+
+            public abstract HourWeatherData.Builder setTemperature(String temperature);
 
             public abstract HourWeatherData build();
         }

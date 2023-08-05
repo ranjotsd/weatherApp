@@ -27,5 +27,8 @@ public class HourCardViewHolder extends RecyclerView.ViewHolder {
                 .load(hourData.get(position).iconUri())
                 .fit()
                 .into(weatherIcon);
+
+        TextView temperature = view.findViewById(R.id.card_hour_temperature);
+        temperature.setText(hourData.get(position).temperature());
     }
 }

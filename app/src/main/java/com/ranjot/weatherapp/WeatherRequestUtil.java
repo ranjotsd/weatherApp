@@ -74,6 +74,10 @@ class WeatherRequestUtil {
                                 .getJSONObject(i)
                                 .getJSONObject("condition")
                                 .getString("text"))
+                            .setTemperature(
+                                String.format("%s°C", hourForecast
+                                    .getJSONObject(i)
+                                    .getString("temp_c")))
                         .build());
         }
         return hourWeatherDataList;
