@@ -3,6 +3,9 @@ package com.ranjot.weatherapp;
 import static com.ranjot.weatherapp.WeatherRequestUtil.BASE_URL;
 import static org.junit.Assert.assertEquals;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,5 +56,29 @@ public class WeatherTestUtilTest {
         String url = WeatherRequestUtil.getRequestUrl("Reading", 3);
 
         assertEquals(url, BASE_URL + "&q=Reading&dt=2023-08-07");
+    }
+
+    @Test
+    public void getWeatherData_getsData() throws JSONException {
+        JSONObject root = new JSONObject();
+        JSONObject forecast = new JSONObject();
+        JSONArray forecastDayArray = new JSONArray();
+        JSONObject dayForecast = new JSONObject();
+        JSONObject day = new JSONObject();
+        JSONObject condition = new JSONObject();
+        root.put("forecast", forecast);
+        forecast.put("forecastday", forecastDayArray);
+        forecastDayArray.put(0, dayForecast);
+        dayForecast.put("date", "2023-08-05");
+        dayForecast.put("day", day);
+        day.put("condition", condition);
+        condition.put("icon", "//github.com/ranjotsd");
+
+
+        WeatherData data = WeatherRequestUtil.getWeatherData(root);
+
+        assertEquals(data.date(), "05-08-2023");
+        assertEquals(data.weatherIconUri(), "https://github.com/ranjotsd");
+
     }
 }

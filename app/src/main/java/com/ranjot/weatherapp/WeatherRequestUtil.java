@@ -23,12 +23,18 @@ class WeatherRequestUtil {
 
     static WeatherData getWeatherData(JSONObject response) throws JSONException {
         WeatherData.Builder builder = WeatherData.builder();
-        String dateTime = response.getJSONObject("location").getString("localtime");
+        JSONObject dayForecast =
+                response.getJSONObject("forecast").getJSONArray("forecastday").getJSONObject(0);
+
+        String dateTime = dayForecast.getString("date");
 
         builder.setDate(
                 DateTimeFormatter
                         .ofPattern("dd-MM-yyyy")
-                        .format(DateTimeFormatter.ISO_LOCAL_DATE.parse(dateTime.substring(0, 10))));
+                        .format(DateTimeFormatter.ISO_LOCAL_DATE.parse(dateTime)));
+
+        builder.setWeatherIconUri("https:"
+                + dayForecast.getJSONObject("day").getJSONObject("condition").getString("icon"));
 
         return builder.build();
     }

@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +44,14 @@ public class WeatherCardFragment extends Fragment {
             System.out.println("Failed to load data" + e.getMessage());
             return;
         }
+
         TextView textDate = view.findViewById(R.id.card_date);
         textDate.setText(weatherData.date());
+
+        ImageView weatherIcon = view.findViewById(R.id.card_weather_icon);
+        Picasso.get()
+                .load(weatherData.weatherIconUri())
+                .fit()
+                .into(weatherIcon);
     }
 }
