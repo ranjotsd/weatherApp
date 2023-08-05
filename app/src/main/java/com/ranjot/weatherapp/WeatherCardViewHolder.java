@@ -1,5 +1,6 @@
 package com.ranjot.weatherapp;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,11 @@ public class WeatherCardViewHolder extends RecyclerView.ViewHolder {
             System.out.println("Failed to load data" + e.getMessage());
             return;
         }
+
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), WeatherDayActivity.class);
+            view.getContext().startActivity(intent);
+        });
 
         TextView textDate = view.findViewById(R.id.card_date);
         textDate.setText(weatherData.date());
