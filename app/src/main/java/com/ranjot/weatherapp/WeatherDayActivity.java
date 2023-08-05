@@ -2,12 +2,14 @@ package com.ranjot.weatherapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,7 +48,20 @@ public class WeatherDayActivity extends Activity {
             return;
         }
 
-        TextView body = findViewById(R.id.weather_day_body);
-        body.setText(weatherData.dayWeatherDescription());
+        TextView dayDescription = findViewById(R.id.weather_day_description);
+        dayDescription.setText(weatherData.dayWeatherDescription());
+
+        TextView dayLocation = findViewById(R.id.weather_day_location);
+        dayLocation.setText("London");
+
+        TextView date = findViewById(R.id.weather_day_date);
+        date.setText(weatherData.date());
+
+        ImageView weatherIcon = findViewById(R.id.weather_day_icon);
+        Picasso.get()
+                .load(weatherData.weatherIconUri())
+                .fit()
+                .into(weatherIcon);
+
     }
 }
