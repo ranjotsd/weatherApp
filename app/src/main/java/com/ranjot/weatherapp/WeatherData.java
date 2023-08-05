@@ -43,6 +43,10 @@ abstract class WeatherData {
     public abstract static class HourWeatherData {
         public abstract String hour();
 
+        public abstract String iconUri();
+
+        public abstract String description();
+
         public static HourWeatherData.Builder builder() {
             return new AutoValue_WeatherData_HourWeatherData.Builder();
         }
@@ -51,6 +55,10 @@ abstract class WeatherData {
         public abstract static class Builder {
 
             public abstract HourWeatherData.Builder setHour(String hour);
+
+            public abstract HourWeatherData.Builder setIconUri(String uri);
+
+            public abstract HourWeatherData.Builder setDescription(String description);
 
             public abstract HourWeatherData build();
         }

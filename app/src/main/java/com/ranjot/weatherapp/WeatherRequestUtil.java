@@ -1,6 +1,8 @@
 package com.ranjot.weatherapp;
 
 import androidx.annotation.VisibleForTesting;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.time.LocalDateTime;
@@ -43,24 +45,35 @@ class WeatherRequestUtil {
                 dayForecast.getJSONObject("day").getJSONObject("condition").getString("text"))
             .setDayWeatherTempMin(dayForecast.getJSONObject("day").getString("mintemp_c") + "°C")
             .setDayWeatherTempMax(dayForecast.getJSONObject("day").getString("maxtemp_c") + "°C")
-            .setHourData(getHourData(dayForecast))
+            .setHourData(getHourData(dayForecast.getJSONArray("hour")))
             .build();
     }
 
-    private static List<WeatherData.HourWeatherData> getHourData(JSONObject dayForecast)
+    private static List<WeatherData.HourWeatherData> getHourData(JSONArray hourForecast)
             throws JSONException {
-        int length = dayForecast.getJSONArray("hour").length();
+        int length = hourForecast.length();
         List<WeatherData.HourWeatherData> hourWeatherDataList = new LinkedList<>();
         for (int i = 0; i < length; i++) {
             hourWeatherDataList
                 .add(
                     WeatherData.HourWeatherData.builder()
                         .setHour(
-                            dayForecast
-                                .getJSONArray("hour")
+                            hourForecast
                                 .getJSONObject(i)
                                 .getString("time")
                                 .substring(11,16))
+                        .setIconUri(
+                            String.format(
+                                "https:%s",
+                                hourForecast
+                                    .getJSONObject(i)
+                                    .getJSONObject("condition")
+                                    .getString("icon")))
+                        .setDescription(
+                            hourForecast
+                                .getJSONObject(i)
+                                .getJSONObject("condition")
+                                .getString("text"))
                         .build());
         }
         return hourWeatherDataList;

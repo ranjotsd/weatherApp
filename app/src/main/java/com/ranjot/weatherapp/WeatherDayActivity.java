@@ -72,7 +72,7 @@ public class WeatherDayActivity extends Activity {
         RecyclerView recyclerView = findViewById(R.id.hour_recycle_view);
         HourCardAdapter adapter = new HourCardAdapter(weatherData);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
     }
 }
