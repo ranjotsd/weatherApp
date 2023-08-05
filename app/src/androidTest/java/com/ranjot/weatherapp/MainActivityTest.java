@@ -2,6 +2,7 @@ package com.ranjot.weatherapp;
 
 import static org.junit.Assert.assertEquals;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -17,10 +18,13 @@ public class MainActivityTest {
             new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void loadsWeatherFragment() {
+    public void loadsWeatherCardAdapter() {
         activityRule.getScenario().onActivity(
-            activity -> assertEquals(
-                activity.getSupportFragmentManager().findFragmentById(R.id.weather_card).getClass(),
-                WeatherCardFragment.class));
+            activity -> {
+                RecyclerView recyclerView = activity.findViewById(R.id.recycler_view);
+                assertEquals(
+                        WeatherCardAdapter.class, recyclerView.getAdapter().getClass());
+                assertEquals(7, recyclerView.getAdapter().getItemCount());
+            });
     }
 }
