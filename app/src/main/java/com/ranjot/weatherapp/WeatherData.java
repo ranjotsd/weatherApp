@@ -1,6 +1,7 @@
 package com.ranjot.weatherapp;
 
 import com.google.auto.value.AutoValue;
+import java.util.List;
 
 @AutoValue
 abstract class WeatherData {
@@ -14,6 +15,7 @@ abstract class WeatherData {
 
     abstract String dayWeatherTempMax();
 
+    abstract List<HourWeatherData> hourData();
 
     static Builder builder() {
         return new AutoValue_WeatherData.Builder();
@@ -32,6 +34,25 @@ abstract class WeatherData {
 
         public abstract Builder setDayWeatherTempMax(String maxTemp);
 
+        public abstract Builder setHourData(List<HourWeatherData> maxTemp);
+
         public abstract WeatherData build();
+    }
+
+    @AutoValue
+    public abstract static class HourWeatherData {
+        public abstract String hour();
+
+        public static HourWeatherData.Builder builder() {
+            return new AutoValue_WeatherData_HourWeatherData.Builder();
+        }
+
+        @AutoValue.Builder
+        public abstract static class Builder {
+
+            public abstract HourWeatherData.Builder setHour(String hour);
+
+            public abstract HourWeatherData build();
+        }
     }
 }

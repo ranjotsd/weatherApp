@@ -5,6 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
 
 class WeatherRequestUtil {
 
@@ -41,6 +43,26 @@ class WeatherRequestUtil {
                 dayForecast.getJSONObject("day").getJSONObject("condition").getString("text"))
             .setDayWeatherTempMin(dayForecast.getJSONObject("day").getString("mintemp_c") + "°C")
             .setDayWeatherTempMax(dayForecast.getJSONObject("day").getString("maxtemp_c") + "°C")
+            .setHourData(getHourData(dayForecast))
             .build();
+    }
+
+    private static List<WeatherData.HourWeatherData> getHourData(JSONObject dayForecast)
+            throws JSONException {
+        int length = dayForecast.getJSONArray("hour").length();
+        List<WeatherData.HourWeatherData> hourWeatherDataList = new LinkedList<>();
+        for (int i = 0; i < length; i++) {
+            hourWeatherDataList
+                .add(
+                    WeatherData.HourWeatherData.builder()
+                        .setHour(
+                            dayForecast
+                                .getJSONArray("hour")
+                                .getJSONObject(i)
+                                .getString("time")
+                                .substring(11,16))
+                        .build());
+        }
+        return hourWeatherDataList;
     }
 }

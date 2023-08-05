@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -66,5 +68,11 @@ public class WeatherDayActivity extends Activity {
         TextView weatherMinMax = findViewById(R.id.weather_day_temp_min_max);
         String temp = weatherData.dayWeatherTempMax() + "\n" + weatherData.dayWeatherTempMin();
         weatherMinMax.setText(temp);
+
+        RecyclerView recyclerView = findViewById(R.id.hour_recycle_view);
+        HourCardAdapter adapter = new HourCardAdapter(weatherData);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapter);
     }
 }
