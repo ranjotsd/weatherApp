@@ -10,6 +10,11 @@ abstract class WeatherData {
 
     abstract String dayWeatherDescription();
 
+    abstract String dayWeatherTempMin();
+
+    abstract String dayWeatherTempMax();
+
+
     static Builder builder() {
         return new AutoValue_WeatherData.Builder();
     }
@@ -23,6 +28,9 @@ abstract class WeatherData {
 
         public abstract Builder setDayWeatherDescription(String text);
 
+        public abstract Builder setDayWeatherTempMin(String minTemp);
+
+        public abstract Builder setDayWeatherTempMax(String maxTemp);
 
         public abstract WeatherData build();
     }

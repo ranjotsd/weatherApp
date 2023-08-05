@@ -43,5 +43,9 @@ public class WeatherCardViewHolder extends RecyclerView.ViewHolder {
 
         TextView textDescription = view.findViewById(R.id.card_body);
         textDescription.setText(weatherData.dayWeatherDescription());
+
+        TextView weatherMinMax = view.findViewById(R.id.card_temp_min_max);
+        String temp = weatherData.dayWeatherTempMax() + "\n" + weatherData.dayWeatherTempMin();
+        weatherMinMax.setText(temp);
     }
 }

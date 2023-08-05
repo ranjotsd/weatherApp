@@ -39,6 +39,8 @@ class WeatherRequestUtil {
                         dayForecast.getJSONObject("day").getJSONObject("condition").getString("icon")))
             .setDayWeatherDescription(
                 dayForecast.getJSONObject("day").getJSONObject("condition").getString("text"))
+            .setDayWeatherTempMin(dayForecast.getJSONObject("day").getString("mintemp_c") + "°C")
+            .setDayWeatherTempMax(dayForecast.getJSONObject("day").getString("maxtemp_c") + "°C")
             .build();
     }
 }

@@ -63,5 +63,8 @@ public class WeatherDayActivity extends Activity {
                 .fit()
                 .into(weatherIcon);
 
+        TextView weatherMinMax = findViewById(R.id.weather_day_temp_min_max);
+        String temp = weatherData.dayWeatherTempMax() + "\n" + weatherData.dayWeatherTempMin();
+        weatherMinMax.setText(temp);
     }
 }

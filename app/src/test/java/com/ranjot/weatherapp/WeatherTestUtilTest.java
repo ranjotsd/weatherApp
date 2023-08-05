@@ -72,6 +72,8 @@ public class WeatherTestUtilTest {
         dayForecast.put("date", "2023-08-05");
         dayForecast.put("day", day);
         day.put("condition", condition);
+        day.put("mintemp_c", "20.0");
+        day.put("maxtemp_c", "30.0");
         condition.put("icon", "//github.com/ranjotsd");
         condition.put("text", "Moderate rain");
 
@@ -80,5 +82,7 @@ public class WeatherTestUtilTest {
         assertEquals(data.date(), "05-08-2023");
         assertEquals(data.weatherIconUri(), "https://github.com/ranjotsd");
         assertEquals(data.dayWeatherDescription(), "Moderate rain");
+        assertEquals(data.dayWeatherTempMin(), "20.0°C");
+        assertEquals(data.dayWeatherTempMax(), "30.0°C");
     }
 }
