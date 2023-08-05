@@ -53,5 +53,8 @@ public class WeatherCardFragment extends Fragment {
                 .load(weatherData.weatherIconUri())
                 .fit()
                 .into(weatherIcon);
+
+        TextView textDescription = view.findViewById(R.id.card_body);
+        textDescription.setText(weatherData.dayWeatherDescription());
     }
 }

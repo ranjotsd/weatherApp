@@ -73,12 +73,12 @@ public class WeatherTestUtilTest {
         dayForecast.put("day", day);
         day.put("condition", condition);
         condition.put("icon", "//github.com/ranjotsd");
-
+        condition.put("text", "Moderate rain");
 
         WeatherData data = WeatherRequestUtil.getWeatherData(root);
 
         assertEquals(data.date(), "05-08-2023");
         assertEquals(data.weatherIconUri(), "https://github.com/ranjotsd");
-
+        assertEquals(data.dayWeatherDescription(), "Moderate rain");
     }
 }

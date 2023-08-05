@@ -8,6 +8,8 @@ abstract class WeatherData {
 
     abstract String weatherIconUri();
 
+    abstract String dayWeatherDescription();
+
     static Builder builder() {
         return new AutoValue_WeatherData.Builder();
     }
@@ -18,6 +20,9 @@ abstract class WeatherData {
         public abstract Builder setDate(String date);
 
         public abstract Builder setWeatherIconUri(String uri);
+
+        public abstract Builder setDayWeatherDescription(String text);
+
 
         public abstract WeatherData build();
     }

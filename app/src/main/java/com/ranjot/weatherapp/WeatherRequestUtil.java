@@ -28,14 +28,17 @@ class WeatherRequestUtil {
 
         String dateTime = dayForecast.getString("date");
 
-        builder.setDate(
+        return builder
+            .setDate(
                 DateTimeFormatter
-                        .ofPattern("dd-MM-yyyy")
-                        .format(DateTimeFormatter.ISO_LOCAL_DATE.parse(dateTime)));
-
-        builder.setWeatherIconUri("https:"
-                + dayForecast.getJSONObject("day").getJSONObject("condition").getString("icon"));
-
-        return builder.build();
+                    .ofPattern("dd-MM-yyyy")
+                    .format(DateTimeFormatter.ISO_LOCAL_DATE.parse(dateTime)))
+            .setWeatherIconUri(
+                    String.format(
+                        "https:%s",
+                        dayForecast.getJSONObject("day").getJSONObject("condition").getString("icon")))
+            .setDayWeatherDescription(
+                dayForecast.getJSONObject("day").getJSONObject("condition").getString("text"))
+            .build();
     }
 }
