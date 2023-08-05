@@ -1,5 +1,7 @@
 package com.ranjot.weatherapp;
 
+import static com.ranjot.weatherapp.WeatherDayActivity.DAYS_IN_FUTURE;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +17,7 @@ public class WeatherCardViewHolder extends RecyclerView.ViewHolder {
         super(view);
     }
 
-    void setUpCardView(View view, JSONObject response) {
+    void setUpCardView(View view, JSONObject response, int daysInFuture) {
         WeatherData weatherData;
         try {
             weatherData = WeatherRequestUtil.getWeatherData(response);
@@ -26,6 +28,7 @@ public class WeatherCardViewHolder extends RecyclerView.ViewHolder {
 
         view.setOnClickListener(v -> {
             Intent intent = new Intent(view.getContext(), WeatherDayActivity.class);
+            intent.putExtra(DAYS_IN_FUTURE, daysInFuture);
             view.getContext().startActivity(intent);
         });
 

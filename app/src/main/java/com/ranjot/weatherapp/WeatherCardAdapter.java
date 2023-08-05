@@ -29,7 +29,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardViewHold
                         Request.Method.GET,
                         WeatherRequestUtil.getRequestUrl("London", position),
                         null,
-                        response -> holder.setUpCardView(holder.itemView, response),
+                        response -> holder.setUpCardView(holder.itemView, response, position),
                         e -> System.out.println("Failed to load data" + e.getMessage()));
         queue.add(request);
     }
