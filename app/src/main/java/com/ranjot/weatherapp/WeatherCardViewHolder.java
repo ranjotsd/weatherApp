@@ -23,6 +23,7 @@ public class WeatherCardViewHolder extends RecyclerView.ViewHolder {
             weatherData = WeatherRequestUtil.getWeatherData(response);
         } catch (JSONException e) {
             System.out.println("Failed to load data" + e.getMessage());
+            view.<TextView>findViewById(R.id.card_body).setText(R.string.failed_to_load_data);
             return;
         }
 

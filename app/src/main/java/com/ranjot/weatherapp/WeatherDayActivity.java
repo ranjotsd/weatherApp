@@ -37,7 +37,11 @@ public class WeatherDayActivity extends Activity {
                         WeatherRequestUtil.getRequestUrl("London", daysInFuture),
                         null,
                         this::setUpView,
-                        e -> System.out.println("Failed to load data" + e.getMessage()));
+                        e -> {
+                            TextView dayDescription = findViewById(R.id.weather_day_description);
+                            dayDescription.setText(R.string.failed_to_load_data);
+                            System.out.println("Failed to load data" + e.getMessage());
+                        });
         queue.add(request);
     }
 
@@ -47,6 +51,8 @@ public class WeatherDayActivity extends Activity {
             weatherData = WeatherRequestUtil.getWeatherData(response);
         } catch (JSONException e) {
             System.out.println("Failed to load data" + e.getMessage());
+            TextView dayDescription = findViewById(R.id.weather_day_description);
+            dayDescription.setText(R.string.failed_to_load_data);
             return;
         }
 

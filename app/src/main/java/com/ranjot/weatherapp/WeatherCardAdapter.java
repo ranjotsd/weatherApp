@@ -3,6 +3,7 @@ package com.ranjot.weatherapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
@@ -30,7 +31,12 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardViewHold
                         WeatherRequestUtil.getRequestUrl("London", position),
                         null,
                         response -> holder.setUpCardView(holder.itemView, response, position),
-                        e -> System.out.println("Failed to load data" + e.getMessage()));
+                        e -> {
+                            holder.itemView
+                                .<TextView>findViewById(R.id.card_body)
+                                .setText(R.string.failed_to_load_data);
+                            System.out.println("Failed to load data" + e.getMessage());
+                        });
         queue.add(request);
     }
 
