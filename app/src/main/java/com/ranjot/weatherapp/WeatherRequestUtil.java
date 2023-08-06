@@ -25,6 +25,7 @@ class WeatherRequestUtil {
         return String.format("%s&q=%s&dt=%s", BASE_URL, location, day);
     }
 
+     /** Converts the weatherApi Json response into {@link WeatherData} */
     static WeatherData getWeatherData(JSONObject response) throws JSONException {
         WeatherData.Builder builder = WeatherData.builder();
         JSONObject dayForecast =

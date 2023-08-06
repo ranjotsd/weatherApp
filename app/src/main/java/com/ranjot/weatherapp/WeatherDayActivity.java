@@ -25,6 +25,7 @@ public class WeatherDayActivity extends Activity {
         setContentView(R.layout.activity_weather_day);
         Bundle extras = getIntent().getExtras();
 
+        // Will try to displays today's data if DAYS_IN_FUTURE is not set.
         int daysInFuture = 0;
         if (extras != null && extras.containsKey(DAYS_IN_FUTURE)) {
             daysInFuture = extras.getInt(DAYS_IN_FUTURE);

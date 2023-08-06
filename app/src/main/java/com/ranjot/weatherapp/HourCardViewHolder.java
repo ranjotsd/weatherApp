@@ -16,6 +16,7 @@ public class HourCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     void setUpCardView(View view, List<WeatherData.HourWeatherData> hourData, int position) {
+        // The card position will determine the hour that should be displayed
         TextView hour = view.findViewById(R.id.card_hour);
         hour.setText(hourData.get(position).hour());
 

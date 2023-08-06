@@ -29,6 +29,7 @@ public class HourCardAdapter extends RecyclerView.Adapter<HourCardViewHolder> {
 
     @Override
     public int getItemCount() {
+        // Using 24 will cause errors on DLS. Hence, use the API hour array size.
         return weatherData.hourData().size();
     }
 }
